@@ -1,129 +1,181 @@
-<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride"
-                access="global">
-        
-    <aura:attribute name="options" type="List" default="[
-    {'label': 'Friends', 'value': 'option1'},
-    {'label': 'Family', 'value': 'option2'},
-    {'label': 'Work', 'value': 'option3'},
-    {'label': 'Relationship(s)', 'value': 'option4'}
-    ]"/>
-    
-        <aura:attribute name="options2" type="List" default="[
-{'label': 'Food', 'value': 'option5'},
-    {'label': 'Exercise', 'value': 'option6'},
-    {'label': 'Health', 'value': 'option7'},                                                    
-    {'label': 'School', 'value': 'option8'},
-    {'label': 'Weather', 'value': 'option9'}                                                        
-    ]"/>
-    
-        <aura:attribute name="options3" type="List" default="[
-    {'label': 'Music', 'value': 'option10'},
-    {'label': 'Sleep', 'value': 'option11'},
-    {'label': 'Relaxing', 'value': 'option12'},
-    {'label': 'Hobby', 'value': 'option13'},
-    {'label': 'Other', 'value': 'option14'}
-    ]"/>
-    <aura:attribute name="value" type="List" default="option1"/>
-
-    
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-23-2020
+  @last modified by  : Nick Huber
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-23-2020   Nick Huber   						  Initial Version
+-->
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
     
     <aura:attribute name="progressIndicatorFlag" type="String" />
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
     
-    <lightning:recordEditForm aura:id="accountRecordCreator" 
-                              onsuccess="{!c.handleSuccess}"
-                              objectApiName="Account">
-        <lightning:messages />
-        
-        <div class="demo-only" style="height: 640px;">
-            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" 
-                     aria-modal="true" aria-describedby="modal-content-id-1" 
-                     class="slds-modal2 slds-fade-in-open">
-                <div class="slds-modal__container2">
-                    <header class="slds-modal__header">
-                       <!-- <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
-                            <lightning:icon iconName="utility:close" alternativeText="Account" />
-                            <span class="slds-assistive-text">Close</span>
-                        </button>-->
-                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Account</h2>
-                    </header>
-                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+    
+    
+    <div class="multistepform" style="">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" 
+                 aria-modal="true" aria-describedby="modal-content-id-1" 
+                 class="slds-fade-in-open">
+            <div class="">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Journal</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    
+                    
+                    <lightning:progressIndicator type="path" currentStep="{!v.progressIndicatorFlag}">
+                        <lightning:progressStep label="Step One" value="step1"/>
+                        <lightning:progressStep label="Step Two" value="step2"/>
+                        <lightning:progressStep label="Step Three" value="step3"/>
+                        <lightning:progressStep label="Step Four" value="step4"/>
+                        <lightning:progressStep label="Step Five" value="step5"/>
+                    </lightning:progressIndicator>
+                    
+                    <div aura:id="stepOne">
                         
+                        <br></br> 
                         
-                        <lightning:progressIndicator type="path" currentStep="{!v.progressIndicatorFlag}">
-                            <lightning:progressStep label="Step One" value="step1"/>
-                            <lightning:progressStep label="Step Two" value="step2"/>
-                            <lightning:progressStep label="Step Three" value="step3"/>
-                            <lightning:progressStep label="Step Four" value="step4"/>
-                            <lightning:progressStep label="Step Five" value="step5"/>
-                        </lightning:progressIndicator>
-                        
-                        <div aura:id="stepOne">
-                            <lightning:inputField fieldName="Name" />
-                            <lightning:inputField fieldName="Name" />
-                            <lightning:button label="Next" onclick="{!c.goToStepTwo}" variant="brand"/> 
+                        <div class="slds-hidden2 nicetext slds-form-element slds-form-element_horizontal" data-aura-rendered-by="1022:0" style="">
+                            <div class="slds-form-element_horizontal slds-form-element" lightning-input_input-host="">
+                                <span lightning-input_input="" data-aria="true" class="slds-assistive-text"></span>
+                                <label lightning-input_input="" for="input-276" class="slds-form-element__label slds-no-flex">First Question</label>
+                                <div lightning-input_input="" class="slds-form-element__control slds-grow">
+                                    <input lightning-input_input="" type="text" id="input-276" maxlength="255" name="" class="slds-input"/>
+                                </div>
+                            </div>
                         </div>
-                        <div aura:id="stepTwo">
-                            <h3 style="text-align:center;font-size: 17px;">What is this account about?<br/>(select up to 5)</h3>
-
-<div class="slds-grid slds-gutters">
-  <div class="slds-col">
-       <lightning:checkboxGroup name=""
-                             label=""
-                             options="{! v.options }"
-                             value="{! v.value }"
-                             onchange="{! c.handleChange }"/>
-  </div>
-  <div class="slds-col">
-        <lightning:checkboxGroup name=""
-                             label=""
-                             options="{! v.options2 }"
-                             value="{! v.value }"
-                             onchange="{! c.handleChange }"/>
-  </div>
-  <div class="slds-col">
-       <lightning:checkboxGroup name=""
-                             label=""
-                             options="{! v.options3 }"
-                             value="{! v.value }"
-                             onchange="{! c.handleChange }"/>
-  </div>
-</div>
-
-
+                        
+                        
+                        <div class="slds-hidden2 nicetext slds-form-element slds-form-element_horizontal" data-aura-rendered-by="1022:0" style="">
+                            <div class="slds-form-element_horizontal slds-form-element" lightning-input_input-host="">
+                                <span lightning-input_input="" data-aria="true" class="slds-assistive-text"></span>
+                                <label lightning-input_input="" for="input-27" class="slds-form-element__label slds-no-flex">Second Question</label>
+                                <div lightning-input_input="" class="slds-form-element__control slds-grow">
+                                    <input lightning-input_input="" type="text" id="input-27" maxlength="255" name="" class="slds-input"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="slds-hidden2 nicetext slds-form-element slds-form-element_horizontal" data-aura-rendered-by="1022:0" style="">
+                            <div class="slds-form-element_horizontal slds-form-element" lightning-input_input-host="">
+                                <span lightning-input_input="" data-aria="true" class="slds-assistive-text"></span>
+                                <label lightning-input_input="" for="input-2" class="slds-form-element__label slds-no-flex">Fourth Question</label>
+                                <div lightning-input_input="" class="slds-form-element__control slds-grow">
+                                    <input lightning-input_input="" type="text" id="input-2" maxlength="255" name="" class="slds-input"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="slds-hidden2 nicetext slds-form-element slds-form-element_horizontal" data-aura-rendered-by="1022:0" style="">
+                            <div class="slds-form-element_horizontal slds-form-element" lightning-input_input-host="">
+                                <span lightning-input_input="" data-aria="true" class="slds-assistive-text"></span>
+                                <label lightning-input_input="" for="input-2761" class="slds-form-element__label slds-no-flex">Fifth Question</label>
+                                <div lightning-input_input="" class="slds-form-element__control slds-grow">
+                                    <input lightning-input_input="" type="text" id="input-2761" maxlength="255" name="" class="slds-input"/>
+                                </div>
+                            </div>
+                        </div>
                             
-                            
-                            <lightning:button label="Back" onclick="{!c.goBackToStepOne}" />
-                            <lightning:button label="Next" onclick="{!c.goToStepThree}" variant="brand"/> 
-                        </div>
-                        <div aura:id="stepThree">
-                            <lightning:inputField fieldName="Name" />3
-                            <lightning:button label="Back" onclick="{!c.goBackToStepTwo}"/>
-                            <lightning:button label="Next" onclick="{!c.goToStepFour}" variant="brand"/>
-                           <!-- <lightning:button label="Save" type="submit" variant="brand"/> -->
-                        </div>
                         
-                       <div aura:id="stepFour">
-                            <lightning:inputField fieldName="Name" />4
-                            <lightning:button label="Back" onclick="{!c.goBackToStepThree}"/>
-                            <lightning:button label="Next" onclick="{!c.goToStepFive}" variant="brand"/>
-                           <!-- <lightning:button label="Save" type="submit" variant="brand"/> -->
-                        </div>
+                        <br></br> 
+                        <br></br>
                         
-                       <div aura:id="stepFive">
-                            <lightning:inputField fieldName="Name" />5
-                            <lightning:button label="Back" onclick="{!c.goBackToStepFour}"/>
-                          <lightning:button label="Save" type="submit" variant="brand"/>
+                        <lightning:button label="Next" onclick="{!c.goToStepTwo}" variant="brand"/> 
+                    </div>
+                    <div aura:id="stepTwo">
+                        <h3 style="text-align:center;font-size: 17px;">Text Heading</h3>
+                        
+                        <div class="slds-hidden2 nicetext slds-form-element slds-form-element_horizontal" data-aura-rendered-by="1022:0" style="">
+                            <div class="slds-form-element_horizontal slds-form-element" lightning-input_input-host="">
+                                <span lightning-input_input="" data-aria="true" class="slds-assistive-text"></span>
+                                <label lightning-input_input="" for="input-271" class="slds-form-element__label slds-no-flex">First Question</label>
+                                <div lightning-input_input="" class="slds-form-element__control slds-grow">
+                                    <input lightning-input_input="" type="text" id="input-271" maxlength="255" name="" class="slds-input"/>
+                                </div>
+                            </div>
                         </div>
                         
                         
+                        
+                        <!--<lightning:inputField fieldName="Event__c" />-->
+                        <lightning:button label="Back" onclick="{!c.goBackToStepOne}" />
+                        <lightning:button label="Next" onclick="{!c.goToStepThree}" variant="brand"/> 
+                    </div>
+                    <div aura:id="stepThree">
+                        <!--<lightning:inputField fieldName="Text_Content__c" />-->
+                        
+                        <h3 style="text-align:center;font-size: 17px;">Heading Text</h3>
+                        
+                        <div class="slds-hidden2 nicetext slds-form-element slds-form-element_horizontal" data-aura-rendered-by="1022:0" style="">
+                            <div class="slds-form-element_horizontal slds-form-element" lightning-input_input-host="">
+                                <span lightning-input_input="" data-aria="true" class="slds-assistive-text"></span>
+                                <label lightning-input_input="" for="input-176" class="slds-form-element__label slds-no-flex">First Question</label>
+                                <div lightning-input_input="" class="slds-form-element__control slds-grow">
+                                    <input lightning-input_input="" type="text" id="input-176" maxlength="255" name="" class="slds-input"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <lightning:button label="Back" onclick="{!c.goBackToStepTwo}"/>
+                        <lightning:button label="Next" onclick="{!c.goToStepFour}" variant="brand"/>
+                        <!-- <lightning:button label="Save" type="submit" variant="brand"/> -->
                     </div>
                     
+                    <div aura:id="stepFour">
+                        
+                        <!--<lightning:inputField fieldName="Title__c" /> -->
+                        
+                        
+                        
+                        
+                        <div class="slds-hidden2 nicetext slds-form-element slds-form-element_horizontal" data-aura-rendered-by="1022:0" style="">
+                            <div class="slds-form-element_horizontal slds-form-element" lightning-input_input-host="">
+                                <span lightning-input_input="" data-aria="true" class="slds-assistive-text"></span>
+                                <label lightning-input_input="" for="input-576" class="slds-form-element__label slds-no-flex">First Question</label>
+                                <div lightning-input_input="" class="slds-form-element__control slds-grow">
+                                    <input lightning-input_input="" type="text" id="input-576" maxlength="255" name="" class="slds-input"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="slds-hidden2 nicetext slds-form-element slds-form-element_horizontal" data-aura-rendered-by="1022:0" style="">
+                            <div class="slds-form-element_horizontal slds-form-element" lightning-input_input-host="">
+                                <span lightning-input_input="" data-aria="true" class="slds-assistive-text"></span>
+                                <label lightning-input_input="" for="input-576" class="slds-form-element__label slds-no-flex">First Question</label>
+                                <div lightning-input_input="" class="slds-form-element__control slds-grow">
+                                    <input lightning-input_input="" type="text" id="input-576" maxlength="255" name="" class="slds-input"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        <lightning:button label="Back" onclick="{!c.goBackToStepThree}"/>
+                        <lightning:button label="Next" onclick="{!c.goToStepFive}" variant="brand"/>
+                        <!-- <lightning:button label="Save" type="submit" variant="brand"/> -->
+                    </div>
+                    
+                    <div aura:id="stepFive">
+                        <h3 style="text-align:center;font-size: 17px;">Great job!  You've completed the form.</h3>
+                        <lightning:button label="Back" onclick="{!c.goBackToStepFour}"/>
+                        <lightning:button label="Save" type="submit" variant="brand"/>
+                    </div>
+                    
+                    
                 </div>
-            </section>
-            <div class="slds2-backdrop slds2-backdrop_open overla2"></div>
-        </div>
-        
-    </lightning:recordEditForm>
+                
+            </div>
+        </section>
+        <div class="slds2-backdrop slds2-backdrop_open overla2"></div>
+    </div>
+    
+    
 </aura:component>
