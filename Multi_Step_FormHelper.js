@@ -65,6 +65,6 @@
             $A.util.toggleClass(stepFour, 'slds-hide');
             var stepFive = component.find("stepFive");
             $A.util.toggleClass(stepFive, 'slds-hide');
-            console.log('5');
+            console.log('5'); 
     }
 })
